@@ -10,16 +10,13 @@ namespace TestMindbox
 
         private enum FigureType
         {
+            UnknownFigure,
             Circle,
             RightTriangle,
             BaseTriangle
         };
 
-        private FigureType type;
-
-        double Max(double a, double b) => a > b ? a : b;
-        double Max(double a, double b, double c) => Max(Max(a, b), c);
-        double Min(double a, double b) => a < b ? a : b;
+        private FigureType type = FigureType.UnknownFigure;
         double Sqr(double a) => a * a;
 
 
@@ -84,7 +81,7 @@ namespace TestMindbox
 
         private bool RightTriangleTest(double a, double b, double c)
         {
-            if (Sqr(Min(a, b)) + Sqr(Min(a, c)) == Sqr(Max(a, b, c)))
+            if (Sqr(a) + Sqr(b) == Sqr(c))
             {
                 return true;
             }
@@ -108,6 +105,8 @@ namespace TestMindbox
                     arr.Add(Convert.ToDouble(digit));
             }
 
+            arr.Sort();
+
             try
             {
                 switch (arr.Count)
@@ -122,6 +121,8 @@ namespace TestMindbox
                         Console.WriteLine("Unknown method with this number of params");
                         break;
                 }
+                Console.WriteLine("figure type:");
+                Console.WriteLine(type);
             }
             catch (ArgumentException)
             {
